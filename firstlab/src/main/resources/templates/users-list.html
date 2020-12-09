@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>User List</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <h1>User List</h1>
+        
+        <div>
+            <nobr>
+                <a th:href="@{/users/add}">Add User</a>
+            </nobr>
+        </div>
+        <br/><br/>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                </tr>
+                <tr th:each ="user : ${users}">
+                    <td><a th:href="@{/users/{userId}(userId=${user.id})}" th:utext="${user.id}">...</a></td>
+                    <td><a th:href="@{/users/{userId}(userId=${user.id})}" th:utext="${user.name}">...</a></td>
+                    <td th:utext="${user.age}"></td>
+                    <td><a th:href="@{/users/{userId}/edit(userId=${user.id})}">Edit</a></td>
+                </tr>
+            </table>          
+        </div>
+        <br/><br/>
+        <div>
+            <nobr>
+                <span th:if="${hasPrev}"><a th:href="@{/users?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span> 
+                <span th:if="${hasNext}"><a th:href="@{/users?page={next}(next=${next})}">Next</a></span>
+            </nobr>
+        </div>
+    </body>
+</html>
